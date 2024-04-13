@@ -1,15 +1,38 @@
-<script setup>
+<script lang="ts">
 import { ref } from 'vue';
 import { ICP_RUST_workshop_backend } from 'declarations/ICP_RUST_workshop_backend/index';
 let greeting = ref('');
 
-async function handleSubmit(e) {
-  e.preventDefault();
-  const target = e.target;
-  const name = target.querySelector('#name').value;
-  await ICP_RUST_workshop_backend.greet(name).then((response) => {
-    greeting.value = response;
-  });
+export default {
+  data() {
+
+    return {
+      greeting: '',
+      wpisy: []
+    }
+
+  },
+
+  methods: {
+
+    async handleSubmit(e) {
+      e.preventDefault();
+      const target = e.target;
+      const name = target.querySelector('#name').value;
+      await ICP_RUST_workshop_backend.greet(name).then((response) => {
+        greeting.value = response;
+      });
+    },
+
+    async pobierzWpisy() {
+      this.wpisy = await ICP_RUST_workshop_backend.pobierz_wpisy();
+    },
+
+  },
+
+  mounted() {
+    this.pobierzWpisy();
+  }
 }
 </script>
 
@@ -24,5 +47,6 @@ async function handleSubmit(e) {
       <button type="submit">Click Me!</button>
     </form>
     <section id="greeting">{{ greeting }}</section>
+    <div>{{ wpisy }}</div>
   </main>
 </template>
