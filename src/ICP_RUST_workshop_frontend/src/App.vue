@@ -8,7 +8,8 @@ export default {
 
     return {
       greeting: '',
-      wpisy: []
+      wpisy: [],
+      nowyWpis: ''
     }
 
   },
@@ -26,6 +27,12 @@ export default {
 
     async pobierzWpisy() {
       this.wpisy = await ICP_RUST_workshop_backend.pobierz_wpisy();
+    },
+
+    async dodajWpis() {
+      if (this.nowyWpis.trim() === '') return;
+      await ICP_RUST_workshop_backend.dodaj_wpis(this.nowyWpis);
+      await this.pobierzWpisy();
     },
 
   },
@@ -47,6 +54,10 @@ export default {
       <button type="submit">Click Me!</button>
     </form>
     <section id="greeting">{{ greeting }}</section>
+    <div>
+      <input v-model="nowyWpis">
+      <button @click="dodajWpis()">Zapisz</button>
+    </div>
     <div>{{ wpisy }}</div>
   </main>
 </template>
