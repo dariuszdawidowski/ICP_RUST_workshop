@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/ICP_RUST_workshop_backend"
+]
+resolver = "2"

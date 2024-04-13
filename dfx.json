@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "ICP_RUST_workshop_backend": {
+      "candid": "src/ICP_RUST_workshop_backend/ICP_RUST_workshop_backend.did",
+      "package": "ICP_RUST_workshop_backend",
+      "type": "rust"
+    },
+    "ICP_RUST_workshop_frontend": {
+      "dependencies": [
+        "ICP_RUST_workshop_backend"
+      ],
+      "source": [
+        "src/ICP_RUST_workshop_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "ICP_RUST_workshop_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
